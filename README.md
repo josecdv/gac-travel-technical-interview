@@ -1,11 +1,11 @@
 # Descripción de la prueba técnica
-Desarrollar una aplicación que gestione el stock de una serie de productos que estarán categorizados. La aplicación permitirá:
+Desarrollar una aplicación que gestione el stock de una serie de productos. La aplicación permitirá:
 - Listar, crear y modificar usuarios.
 - Listar, crear y modificar categorías de productos.
 - Listar, crear y modificar productos.
 - Modificación de stock sobre los productos *(añadir o eliminar cierta cantidad de productos disponibles)*.
 - Histórico de cambios de stock.
-- Autenticación de usuarios en el sistema.
+- Autenticación de usuarios para acceder al sistema.
 
 Antes de comenzar con la prueba técnica, leer y comprendender todos los puntos de este README.
 ## Evaluación
@@ -55,11 +55,12 @@ A continuación se describen las entidades y cada uno de sus campos:
 
 3. Generar el CRUD de la entidad `users`. La ruta de acceso deberá ser pública, permitiendo el registro a cualquier usuario sin cuenta.
 4. Implementar la autenticación de usuarios con el componente `Access Control (Authorization)` de Symfony. Solo existirá un rol de administrador (`ROLE_ADMIN`). [Más info](https://symfony.com/doc/current/security.html#access-control-authorization).
-5. Generar el CRUD de las entidades `categories` y `products` y hacerlas accesible desde la interfaz de usuario. Las rutas de acceso deberán de estar tras un firewall permitiendo el acceso únicamente a usuarios con rol `ROLE_ADMIN`. No es necesario la eliminación de los registros.
-6. Implementar el histórico para controlar todos los movimientos de sotck de los productos. Deberá de ser controlado mediante la entidad `stock_historic` y un evento que se disparará cuando el stock de un producto haya sido creado o modificado. Esta entidad almacenará un registro con el usuario que realilza la gestión y la cantidad de productos añadidos o consumidos. El acceso al histórica de cada producto se realizará mediante un botón de acción en cada producto.
-7. Subir los cambios al repositorio.
+5. Generar el CRUD de las entidades `categories` y `products` y hacerlas accesible desde la interfaz de usuario. Las rutas de acceso deberán de estar tras un firewall ([Más info](https://symfony.com/doc/current/security.html#the-firewall)) permitiendo el acceso únicamente a usuarios con rol `ROLE_ADMIN`. No es necesario la eliminación de los registros.
+6. Implementar la funcionalidad de modificación de stock de productos. Para ello generar un formulario que solicite la cantidad de stock a añadir o eliminar *(deberá de permitir negativos y no se podrá eliminar más stock del existente)* al que se accederá desde un botón de acción de la lista de productos.
+7. Implementar el histórico de stock para controlar todos los movimientos de stock de los productos. El control de stock deberá de ser manejado en un evento que se disparará cuando el campo `stock` de `products` se vea modificado. Este evento almacenará un nuevo registro `stock_historic` con el usuario que realilza la gestión y la cantidad de productos añadidos o consumidos. El acceso al histórico de cada producto se realizará mediante un botón de acción de la lista de productos.
+8. Subir los cambios al repositorio.
 
-Para agilizar el desarrollo de la aplicación, el repositorio incluye un template HTML dentro de la carpeta `template` que puede ser utilizado para montar la interfaz de usuario. El template no dispone de todas las pantallas de la aplicación para poder evaluar la capacidad de reutilización de plantillas HTML.
+Para agilizar el desarrollo de la aplicación, el repositorio incluye un template HTML dentro de la carpeta `template` que deberá ser utilizado para montar la interfaz de usuario. El template no dispone de todas las pantallas de la aplicación para poder evaluar la capacidad de reutilización de plantillas HTML.
 
 Todos los formulario deberán ser manejados y validados con los `Forms` de Symfony. [Más info](https://symfony.com/doc/current/forms.html).
 ### Descripción técnica evaluación opcional
