@@ -17,8 +17,6 @@ class StockHistoric
      */
     private $id;
 
-
-
     /**
      * @ORM\Column(type="datetime")
      */

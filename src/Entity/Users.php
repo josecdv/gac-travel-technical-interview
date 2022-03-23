@@ -94,7 +94,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->uuid;
+        return (string) $this->username;
     }
 
     /**

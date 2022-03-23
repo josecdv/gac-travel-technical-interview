@@ -89,3 +89,11 @@ Se permite el uso del paquete `maker` de Symfony sin ningún tipo de restricció
 ```
 symfony console list make
 ```
+# To-do list:
+- Las etiquetas nombre y contraseña de la plantilla del registro no se han quedado conde deberian.  
+- El registro tiene que apuntar a la pagina de index, lo mas facil es sacarlo del controlador users.
+
+- No he pensado bien en el username <-> uii  
+controlar los errores:  
+    - El nombre de usario ya existe.  
+
