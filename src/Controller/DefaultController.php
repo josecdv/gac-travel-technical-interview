@@ -8,11 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
    /**
-    * @Route("/")
+    * @Route("/default")
     */
 public function number(): Response
     {
-        return $this->render('public/index.html.twig', [ ]);
+        //return $this->render('public/index.html.twig', [ ]);
         return new Response ('<html><body> it is work </body></html>');
 
     }
