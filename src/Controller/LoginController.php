@@ -49,7 +49,7 @@ class LoginController extends AbstractController
             $user->setUuid($user->getUsername());
             $usersRepository->add($user);
 
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('login/success.html.twig', [ ]);
         }
 
         return $this->renderForm('users/registro.html.twig', [
