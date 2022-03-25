@@ -19,7 +19,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            #pattern: ^/users
+            #pattern: ^/stock
             lazy: true
             provider: app_user_provider
             form_login:
@@ -35,6 +35,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        #- { path: ^/users, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/stock, roles: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
