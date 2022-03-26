@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Nueva categoria - Stockify
+{% endblock %}
+
+{% block body %}
+	<div class="wrapper">
+		{{ include('menu.html.twig') }}
+
+		<div class="content-page">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+							<div>
+								<h4 class="mb-3">Nueva categoría</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						{{ include('categories/_form.html.twig') }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock body %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorias - Stockify
+{% endblock %}
+
+{% block body %}
+	{{ include('menu.html.twig') }}
+	<div class="wrapper">
+		<div class="content-page">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+							<div>
+								<h4 class="mb-3">Categorías</h4>
+							</div>
+							<a href={{ path('app_categories_new') }} class="btn btn-primary add-list">
+								<i class="las la-plus mr-3"></i>Nueva categoría
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="table-responsive mb-3">
+							<table class="table mb-0 tbl-server-info no-footer" role="grid">
+								<thead class="bg-white text-uppercase">
+									<tr class="ligth ligth-data" role="row">
+										<th class="text-left">Nombre</th>
+										<th class="text-center">Código</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for category in categories %}
+										<tr>
+											<td class="text-left">{{category.name}}</td>
+											<td class="text-center">{{category.id}}</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+

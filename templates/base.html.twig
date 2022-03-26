@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="shortcut icon" href= {{asset('assets/images/favicon.ico') }} />
-        <link rel="stylesheet" href= {{asset('assets/css/backend-plugin.min.css') }}>
-        <link rel="stylesheet" href= {{asset('assets/css/backend.css?v=1.0.0') }}>
-        <link rel="stylesheet" href= {{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}>
-        <link rel="stylesheet" href= {{asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}>
-        <link rel="stylesheet" href= {{asset('assets/vendor/remixicon/fonts/remixicon.css') }}>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href={{asset('assets/images/favicon.ico') }}/>
+		<link rel="stylesheet" href={{asset('assets/css/backend-plugin.min.css') }}>
+		<link rel="stylesheet" href={{asset('assets/css/backend.css?v=1.0.0') }}>
+		<link rel="stylesheet" href={{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}>
+		<link rel="stylesheet" href={{asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}>
+		<link rel="stylesheet" href={{asset('assets/vendor/remixicon/fonts/remixicon.css') }}>
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+		           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+		{% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        <!-- loader Start -->
-        <div id="loading">
-            <div id="loading-center">
-            </div>
-        </div>
-        <!-- loader END -->
-        {% block body %}{% endblock %}
-        <!-- Backend Bundle JavaScript -->
-        <script src={{asset('assets/js/backend-bundle.min.js') }}></script>
-    
-        <!-- app JavaScript -->
-        <script src={{asset('assets/js/app.js') }}></script>
-    </body>
+		{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+		{% endblock %}
+	</head>
+	<body>
+		<!-- loader Start -->
+		<div id="loading">
+			<div id="loading-center"></div>
+		</div>
+		<!-- loader END -->
+		{% block body %}{% endblock %}
+		<!-- Backend Bundle JavaScript -->
+		<script src={{asset('assets/js/backend-bundle.min.js') }}></script>
+
+		<!-- app JavaScript -->
+		<script src={{asset('assets/js/app.js') }}></script>
+	</body>
 </html>

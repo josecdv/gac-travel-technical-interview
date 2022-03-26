@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-12">
+        <!-- CON ERROR 
+        <div class="form-group has-error has-danger">-->
+        <div class="form-group">
+            <label>Nombre *</label>
+
+            {{ form_widget(form.name, { 'attr': {'class': ' form-control'} }) }}
+            <!-- CON ERROR  
+            <div class="help-block with-errors">
+                <ul class="list-unstyled">
+                    <li>Rellene este campo.</li>
+                </ul>
+            </div>-->
+        </div>
+    </div>
+    <div class="col-md-12 mt-5 text-center">
+        
+        {{ form_row(form.save, { 'label': 'to-do-variablePasadaDesdeElForm','attr': {'class': 'btn btn-primary mr-2' } }) }}
+    </div>
+</div>
+{{ form_end(form) }}
+
+
+
+
