@@ -1,39 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Products index{% endblock %}
+{% block title %}Productos - Stockify
+{% endblock %}
 
 {% block body %}
-    <h1>Products index</h1>
+	{% include('menu.html.twig') with {'activeSection': 'products'} %}
+	<div class="wrapper">
+		<div class="content-page">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+							<div>
+								<h4 class="mb-3">Productos</h4>
+							</div>
+							<a href={{ path('app_products_new') }} class="btn btn-primary add-list">
+								<i class="las la-plus mr-3"></i>Nuevo producto
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="table-responsive mb-3">
+							<table class="table mb-0 tbl-server-info no-footer" role="grid">
+								<thead class="bg-white text-uppercase">
+									<tr class="ligth ligth-data" role="row">
+										<th class="text-left">Nombre</th>
+										<th class="text-center">Código</th>
+										<th class="text-center">Categoría</th>
+										<th class="text-center">Stock</th>
+										<th class="text-center">Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for product in products %}
+										<tr>
+											<td class="text-left">{{product.name}}</td>
+											<td class="text-center">{{product.id}}</td>
+											<td class="text-center">{{product.category.name}}</td>
+											<td class="text-center">{{product.stock}}</td>
+											<td class="text-right">
+												<a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar stock" href="#">
+													<i class="las la-minus"></i>
+												</a>
+												<a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Añadir stock" href="#">
+													<i class="las la-plus"></i>
+												</a>
+												<a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Histórico" href="#">
+													<i class="las la-history"></i>
+												</a>
+												<a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{ path('app_products_edit', {'id': product.id}) }}">
+													<i class="ri-pencil-line"></i>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Created_at</th>
-                <th>Stock</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ product.stock }}</td>
-                <td>
-                    <a href="{{ path('app_products_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_products_new') }}">Create new</a>
 {% endblock %}

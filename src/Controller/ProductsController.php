@@ -29,7 +29,10 @@ class ProductsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $product->setStock(0);
+            $product->setCreatedAt(new \DateTime());
             $productsRepository->add($product);
+
             return $this->redirectToRoute('app_products_index', [], Response::HTTP_SEE_OTHER);
         }
 

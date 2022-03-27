@@ -25,7 +25,7 @@
 									<tr class="ligth ligth-data" role="row">
 										<th class="text-left">Nombre</th>
 										<th class="text-center">Código</th>
-										<th class="text-center">Gestion</th>
+										<th class="text-right">Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -34,8 +34,10 @@
 											<td class="text-left">{{user.username}}</td>
 											<td class="text-center">{{user.id}}</td>
 											{# <td> <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a> </td> #}
-											<td class="text-center">
-												<a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
+											<td class="text-right">
+												<a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{ path('app_users_edit', {'id': user.id}) }}">
+													<i class="ri-pencil-line"></i>
+												</a>
 											</td>
 										</tr>
 									{% endfor %}

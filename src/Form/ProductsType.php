@@ -2,10 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Categories;
 use App\Entity\Products;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProductsType extends AbstractType
 {
@@ -13,10 +16,12 @@ class ProductsType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('created_at')
-            ->add('stock')
-            ->add('category')
-        ;
+            /* ->add('stock') */
+            ->add('category', EntityType::class, [
+                'class' => Categories::class,
+                'choice_label' => 'name',
+            ])
+            ->add('save', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

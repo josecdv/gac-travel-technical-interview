@@ -30,5 +30,4 @@
 
     <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
 
-    {{ include('products/_delete_form.html.twig') }}
 {% endblock %}

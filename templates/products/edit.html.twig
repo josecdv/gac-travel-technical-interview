@@ -1,13 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Products{% endblock %}
+{% block title %}
+	Editar categoría - Stockify
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Products</h1>
+	<div class="wrapper">
+		{% include('menu.html.twig') with {'activeSection': 'categories'} %}
 
-    {{ include('products/_form.html.twig', {'button_label': 'Update'}) }}
-
+		<div class="content-page">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+							<div>
+								<h4 class="mb-3">Editar categoría</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+                        {{ include('products/_form.html.twig', {'button_label': 'Update'}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <a href="{{ path('app_products_index') }}">back to list</a>
 
-    {{ include('products/_delete_form.html.twig') }}
-{% endblock %}
+{% endblock body %}
+
