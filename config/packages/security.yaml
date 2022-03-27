@@ -25,6 +25,7 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
+                default_target_path: app_categories_index
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

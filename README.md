@@ -91,6 +91,7 @@ symfony console list make
 ```
 # To-do list:
 - El menu lateral no se despliega para anchos menores de 1300px 
+- El crear un usuario desde el listado muestra un "¿ya tienes cuenta?" abria que distiguir si estas logueado o no para mostrar este mensaje
 
 - Las etiquetas nombre y contraseña de la plantilla del registro no se han quedado conde deberian.  
 - El registro tiene que apuntar a la pagina de index, lo mas facil es sacarlo del controlador users.

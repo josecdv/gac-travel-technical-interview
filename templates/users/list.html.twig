@@ -1,43 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users index{% endblock %}
+{% block title %}Usuarios Stockify{% endblock %}
 
 {% block body %}
-    <h1>Users index</h1>
+	{{ include('menu.html.twig') }}
+	<div class="wrapper">
+		<div class="content-page">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+							<div>
+								<h4 class="mb-3">Usuarios</h4>
+							</div>
+							<a href={{ path('app_users_new') }} class="btn btn-primary add-list">
+								<i class="las la-plus mr-3"></i>Nuevo usuario
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="table-responsive mb-3">
+							<table class="table mb-0 tbl-server-info no-footer" role="grid">
+								<thead class="bg-white text-uppercase">
+									<tr class="ligth ligth-data" role="row">
+										<th class="text-left">Nombre</th>
+										<th class="text-center">Código</th>
+										<th class="text-center">Gestion</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for user in users %}
+										<tr>
+											<td class="text-left">{{user.username}}</td>
+											<td class="text-center">{{user.id}}</td>
+											{# <td> <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a> </td> #}
+											<td class="text-center">
+												<a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Uuid</th>
-                <th>Roles</th>
-                <th>Username</th>
-                <th>Active</th>
-                <th>Created_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.uuid }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.active ? 'Yes' : 'No' }}</td>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_users_new') }}">Create new</a>
 {% endblock %}
+

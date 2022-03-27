@@ -41,7 +41,7 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('users/edit.html.twig', [
+        return $this->renderForm('users/edicionUsuario.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -50,7 +50,7 @@ class UsersController extends AbstractController
     #[Route('/{id}', name: 'app_users_delete', methods: ['POST'])]
     public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $usersRepository->remove($user);
         }
 
