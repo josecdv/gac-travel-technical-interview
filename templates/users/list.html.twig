@@ -3,7 +3,7 @@
 {% block title %}Usuarios Stockify{% endblock %}
 
 {% block body %}
-	{{ include('menu.html.twig') }}
+	{% include('menu.html.twig') with {'activeSection': 'users'} %}
 	<div class="wrapper">
 		<div class="content-page">
 			<div class="container-fluid">

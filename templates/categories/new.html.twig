@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="wrapper">
-		{{ include('menu.html.twig') }}
+		{% include('menu.html.twig') with {'activeSection': 'categories'} %}
 
 		<div class="content-page">
 			<div class="container-fluid">

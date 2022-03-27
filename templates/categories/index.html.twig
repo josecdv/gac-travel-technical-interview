@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorias - Stockify
-{% endblock %}
+{% block title %}Categorias - Stockify{% endblock %}
 
 {% block body %}
-	{{ include('menu.html.twig') }}
+	{% include('menu.html.twig') with {'activeSection': 'categories'} %}
 	<div class="wrapper">
 		<div class="content-page">
 			<div class="container-fluid">
