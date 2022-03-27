@@ -25,6 +25,7 @@
 									<tr class="ligth ligth-data" role="row">
 										<th class="text-left">Nombre</th>
 										<th class="text-center">Código</th>
+										<th class="text-center">Gestión</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -32,6 +33,9 @@
 										<tr>
 											<td class="text-left">{{category.name}}</td>
 											<td class="text-center">{{category.id}}</td>
+											<td class="text-center">
+												<a href="{{ path('app_categories_edit', {'id': category.id}) }}">editar</a>
+											</td>
 										</tr>
 									{% endfor %}
 								</tbody>
