@@ -95,6 +95,7 @@ symfony console list make
 - echo en falta botones de volver y tengo dudas sobre si hace falta un "mostrar" con el listado es suficiente
 - Las etiquetas nombre y contraseña de la plantilla del registro no se han quedado conde deberian.  
 - El registro tiene que apuntar a la pagina de index, lo mas facil es sacarlo del controlador users.
+- No se si deberia hacer la parte del stock con los 
 
 - No he pensado bien en el username <-> uii  
 controlar los errores:  
