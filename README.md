@@ -11,7 +11,7 @@ Antes de comenzar con la prueba técnica, leer y comprendender todos los puntos 
 ## Evaluación
 Se evaluarán los siguientes aspectos técnicos:
 - Conocimientos en GIT.
-- Conocimientos en Symfony 5.3 y el patrón MVC.
+- Conocimientos en Symfony y el patrón MVC.
 - Conocimientos en Doctrine, gestión de entidades y migracines bajo MySQL 8.0.
 - Uso de la consola de Symfony. [Más info](https://symfony.com/doc/current/components/console.html).
 - Reutilización de plantillas HTML.
@@ -54,10 +54,10 @@ A continuación se describen las entidades y cada uno de sus campos:
     - `stock`: Cantidad de productos añadidos o eliminados del stock.
 
 3. Generar el CRUD de la entidad `users`. La ruta de acceso deberá ser pública, permitiendo el registro a cualquier usuario sin cuenta.
-4. Implementar la autenticación de usuarios con el componente `Access Control (Authorization)` de Symfony. Solo existirá un rol de administrador (`ROLE_ADMIN`). [Más info](https://symfony.com/doc/current/security.html#access-control-authorization).
-5. Generar el CRUD de las entidades `categories` y `products` y hacerlas accesible desde la interfaz de usuario. Las rutas de acceso deberán de estar tras un firewall ([Más info](https://symfony.com/doc/current/security.html#the-firewall)) permitiendo el acceso únicamente a usuarios con rol `ROLE_ADMIN`. No es necesario la eliminación de los registros.
+4. Implementar la autenticación de usuarios con el componente `Access Control (Authorization)` de Symfony. Solo existirá un rol, el de administrador (`ROLE_ADMIN`). [Más info](https://symfony.com/doc/current/security.html#access-control-authorization).
+5. Generar el CRUD de las entidades `categories` y `products` y hacerlas accesible desde la interfaz de usuario. Las rutas de acceso deberán de estar tras un firewall ([Más info](https://symfony.com/doc/current/security.html#the-firewall)) permitiendo el acceso únicamente a usuarios con rol `ROLE_ADMIN`.
 6. Implementar la funcionalidad de modificación de stock de productos. Para ello generar un formulario que solicite la cantidad de stock a añadir o eliminar *(deberá de permitir negativos y no se podrá eliminar más stock del existente)* al que se accederá desde un botón de acción de la lista de productos.
-7. Implementar el histórico de stock para controlar todos los movimientos de stock de los productos. El control de stock deberá de ser manejado en un evento que se disparará cuando el campo `stock` de `products` se vea modificado. Este evento almacenará un nuevo registro `stock_historic` con el usuario que realilza la gestión y la cantidad de productos añadidos o consumidos. El acceso al histórico de cada producto se realizará mediante un botón de acción de la lista de productos.
+7. Implementar el histórico de stock para controlar todos los movimientos de stock de los productos. El control de stock deberá de ser manejado en un evento de Doctrine ([Más info](https://symfony.com/doc/current/doctrine/events.html)) que se disparará cuando el campo `stock` de `products` sea modificado. Este evento almacenará un nuevo registro `stock_historic` con el usuario que realilza la gestión y la cantidad de productos añadidos o consumidos. El acceso al histórico de cada producto se realizará mediante un botón de acción de la lista de productos.
 8. Subir los cambios al repositorio.
 
 Para agilizar el desarrollo de la aplicación, el repositorio incluye un template HTML dentro de la carpeta `template` que deberá ser utilizado para montar la interfaz de usuario. El template no dispone de todas las pantallas de la aplicación para poder evaluar la capacidad de reutilización de plantillas HTML.
@@ -71,7 +71,7 @@ Las llamadas HTTP deberán de realizarse con la librería `HTTP client` de Symfo
 ## Información de utilidad
 ### Symfony Local Web Server
 Symfony proporciona un servidor web para el entorno de desarrollo. 
-Si tienes varias versiones de PHP instaladas en tu equipo, puedes decirle a Symfony cuál usar. Para ello, creaa un archivo llamado `.php-version` en el directorio raíz del proyecto con la versión a utilizar:
+Si tienes varias versiones de PHP instaladas en tu equipo, puedes definir cuál usar. Para ello, creaa un archivo llamado `.php-version` en el directorio raíz del proyecto con la versión a utilizar:
 ```
 echo 8.0.6 > .php-version
 ```
