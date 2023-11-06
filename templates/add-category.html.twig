@@ -1,5 +1,6 @@
 {% extends "base-crud.html.twig" %}
 
+{% set section = 'categories' %}
 {% block page_title %}{% if category.id %}Editar{% else %}Nueva{% endif %} categoría{% endblock %}
 {% block section_title %}{% if category.id %}Editar{% else %}Nueva{% endif %} categoría{% endblock %}
 {% block content %}
