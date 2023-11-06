@@ -29,8 +29,8 @@ security:
             # switch_user: true
 
             form_login:
-                login_path: index
-                check_path: index
+                login_path: login
+                check_path: login
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

@@ -8,15 +8,28 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/', name: 'login', methods: ['GET'])]
+    public function loginForm(AuthenticationUtils $authenticationUtils): Response
+    {
+        return $this->render('index.html.twig', [
+            'last_username' => '',
+            'error' => ''
+        ]);
+    }
+
+    #[Route('/', name: 'login_check', methods: ['POST'])]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('index.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error
-        ]);
+        if ($error) {
+            return $this->render('index.html.twig', [
+                'last_username' => $lastUsername,
+                'error' => $error
+            ]);
+        }
+
+        return $this->render('home.html.twig');
     }
 }
