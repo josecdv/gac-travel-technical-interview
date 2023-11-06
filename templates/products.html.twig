@@ -1,0 +1,46 @@
+{% extends "base-crud.html.twig" %}
+
+{% set section = 'products' %}
+{% block page_title %}Productos{% endblock %}
+{% block section_title %}Productos{% endblock %}
+{% block controls %}
+<a href="add" class="btn btn-primary add-list">
+	<i class="las la-plus mr-3"></i>Nuevo producto
+</a>
+{% endblock %}
+{% block content %}
+    <div class="table-responsive mb-3">
+        <table class="table mb-0 tbl-server-info no-footer" role="grid">
+            <thead class="bg-white text-uppercase">
+                <tr class="ligth ligth-data" role="row">
+                    <th class="text-left">Nombre</th>
+                    <th class="text-left">Código</th>
+                    <th class="text-left">Categoría</th>
+                    <th class="text-center">Stock</th>
+                    <th class="text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td class="text-left">{{ product.name }}</td>
+                        <td class="text-left">{{ product.id }}</td>
+                        <td class="text-left">{{ product.category.name }}</td>
+                        <td class="text-center">{{ product.stock }}</td>
+                        <td class="text-right">
+                            <a class="badge bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cambiar stock" href="stock/{{ product.id }}">
+                                <i class="ri-truck-line"></i>
+                            </a>
+                            <a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Histórico" href="#">
+                                <i class="las la-history"></i>
+                            </a>
+                            <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="edit/{{ product.id }}">
+                                <i class="ri-pencil-line"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

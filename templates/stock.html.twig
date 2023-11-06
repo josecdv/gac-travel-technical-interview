@@ -1,0 +1,24 @@
+{% extends "base-crud.html.twig" %}
+
+{% set section = 'products' %}
+{% block page_title %}Modificar stock{% endblock %}
+{% block section_title %}product.name{% endblock %}
+{% block content %}
+<form method="post">
+	<div class="row">
+		<div class="col-md-6">
+			<p>Stock actual: {{ product.stock }}</p>
+			<div class="form-group">
+				<label>Movimiento de stock *</label>
+				<input type="text" class="form-control" name="stock">
+			</div>
+			{% if not enoughStock == true %}
+				<div class="text-danger">This product has not enough stock.</div>
+			{% endif %}
+		</div>
+		<div class="col-md-12 mt-5 text-center">
+			<button type="submit" class="btn btn-primary mr-2">Modificar</button>
+		</div>
+	</div>
+</form>
+{% endblock %}

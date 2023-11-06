@@ -1,0 +1,38 @@
+{% extends "base-crud.html.twig" %}
+
+{% set section = 'categories' %}
+{% block page_title %}Categorías{% endblock %}
+{% block section_title %}Categorías{% endblock %}
+{% block controls %}
+<a href="add" class="btn btn-primary add-list">
+	<i class="las la-plus mr-3"></i>Nueva categoría
+</a>
+{% endblock %}
+{% block content %}
+	<div class="table-responsive mb-3">
+		<table class="table mb-0 tbl-server-info no-footer" role="grid">
+			<thead class="bg-white text-uppercase">
+				<tr class="ligth ligth-data" role="row">
+					<th class="text-left">Nombre</th>
+					<th class="text-center">Código</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td class="text-left">{{ category.name }}</td>
+						<td class="text-center">{{ category.id }}</td>
+						<td>
+							<a href="edit/{{ category.id }}" class="btn btn-success">
+								<i class="ri-edit-line"></i>
+							</a>
+							<a href="delete/{{ category.id }}" class="btn btn-danger">
+								<i class="ri-delete-bin-line"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

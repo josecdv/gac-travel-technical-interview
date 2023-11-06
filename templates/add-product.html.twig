@@ -1,0 +1,50 @@
+{% extends "base-crud.html.twig" %}
+
+{% set section = 'products' %}
+{% block page_title %}{% if product.id %}Editar{% else %}Nuevo{% endif %} producto{% endblock %}
+{% block section_title %}{% if product.id %}Editar{% else %}Nuevo{% endif %} producto{% endblock %}
+{% block content %}
+{% if product.id %}
+    {% set productName = product.name %}
+    {% set categoryId = product.category.id %}
+    {% set action = '' %}
+{% else %}
+    {% set productName = '' %}
+    {% set categoryId = 0 %}
+    {% set action = 'add' %}
+{% endif %}
+<form method="post" action="{{ action }}">
+    {{ form_widget(form._token) }}
+	<div class="row">
+		<div
+			class="col-md-6">
+			<div class="form-group">
+				<label>Nombre *</label>
+				<input type="text" class="form-control" name="{{ field_name(form.name) }}" value="{{ productName }}">
+                <div class="text-danger">
+                    {{ form_errors(form.name) }}
+                </div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Categoría *</label>
+				<select class="form-control" name="category">
+                    {% for category in categories %}
+					    <option {% if product.category.id == category.id %}selected{% endif %} value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="col-md-12 mt-5 text-center">
+			<button type="submit" class="btn btn-primary mr-2">
+                {% if product.id %}
+                    Guardar
+                {% else %}
+                    Añadir producto
+                {% endif %}
+            </button>
+		</div>
+	</div>
+</form>
+{% endblock %}
