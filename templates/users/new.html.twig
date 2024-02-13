@@ -33,6 +33,25 @@
                                                         ¿Ya tienes una cuenta? <a href="{{ path('app_login') }}" class="text-primary">Accede a Stockify</a>
                                                     </p>
                                                 {{ form_end(form) }}
+                                                {% for message in app.flashes('error') %}
+                                                    <div class="alert alert-danger flash-message">
+                                                        {{ message }}
+                                                    </div>
+                                                    <script>
+                                                        // Hide the flash message after 3 seconds
+                                                        setTimeout(function() {
+                                                            const flashMessage = document.querySelector('.flash-message');
+                                                            if (flashMessage) {
+                                                                flashMessage.style.transition = 'opacity 1s';
+                                                                flashMessage.style.opacity = '0';
+                                                                flashMessage.addEventListener('transitionend', () => {
+                                                                    flashMessage.remove();
+                                                                });
+                                                            }
+                                                        }, 3000);
+                                                    </script>
+
+                                                {% endfor %}
                                             </div>
                                         </div>
                                         <div class="col-lg-5 content-right">

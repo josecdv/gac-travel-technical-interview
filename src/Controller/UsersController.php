@@ -28,13 +28,21 @@ class UsersController extends AbstractController
     }
 
     #[Route('/new', name: 'users_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UsersRepository $usersRepository): Response
     {
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($usersRepository->usernameExists($user->getUsername())) {
+                $this->addFlash('error', 'Username already exists.');
+                return $this->renderForm('users/new.html.twig', [
+                    'user' => $user,
+                    'form' => $form,
+                ]);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

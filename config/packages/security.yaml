@@ -8,6 +8,19 @@ services:
         arguments: []
         tags:
             - { name: doctrine.event_listener, event: postUpdate}
+    
+    App\DataFixtures\AppFixtures:
+        arguments:
+            $client: '@Symfony\Component\HttpClient\HttpClient'
+            $usersController: '@App\Controller\UsersController'
+        tags:
+            - { name: doctrine.fixture.loader }
+
+    App\Controller\UsersController:
+        properties:
+            flashMessages:
+                session_key: 'flash_messages'
+                flash_message_duration: 3 # Set the duration to 3 seconds
         
          
 security:
@@ -39,6 +52,9 @@ security:
             #     login_path: app_login
             #     check_path: app_login
             logout: true
+
+            #pattern: ^/reload-data
+            #security: false
             #    path: /logout
             # guard:
             #     authenticators:
@@ -66,6 +82,7 @@ security:
         - {path: ^/products, roles: ROLE_ADMIN}         
         - {path: ^/categories, roles: ROLE_ADMIN}
         - {path: ^/stock/historic, roles: ROLE_ADMIN}
+        - {path: ^/reload-data, roles: ROLE_ADMIN}
                
         # - { path: ^/profile, roles: ROLE_USER }
    

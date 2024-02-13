@@ -46,5 +46,15 @@ class UsersRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function usernameExists(string $username): bool
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->where('u.username = :username')
+            ->setParameter('username', $username);
+
+        return (int) $qb->getQuery()->getSingleScalarResult() > 0;
+    }
     
 }

@@ -6,7 +6,10 @@ login:
   controller: App\Controller\SecurityController::login
 logout:
   path: /logout
-  controller: App\Controller\SecurityController::logout  
+  controller: App\Controller\SecurityController::logout 
+# reload:
+#     path: /reload-data
+#     controller: App\Controller\DefaultController::reloadData 
 # products_stock:
 #     path: /products/{id}/stock/
 #     defaults:
