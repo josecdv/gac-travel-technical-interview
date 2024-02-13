@@ -26,11 +26,12 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \Exception('logout() should never be reached');
-        //throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        
     }
 
     public function accessDenied(): Response
     {
+        //Sin Implimentar
         // Redirige a la página de acceso prohibido
         return $this->render('accessdenied/access_denied.html.twig', [], new Response('', Response::HTTP_FORBIDDEN));
     }

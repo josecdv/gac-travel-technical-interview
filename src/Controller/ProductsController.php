@@ -52,7 +52,7 @@ class ProductsController extends AbstractController
         return $this->renderForm('products/new.html.twig', [
             'product' => $product,
             'form' => $form,
-            'categories' => $categories, // Pass the categories variable to the template
+            'categories' => $categories, 
         ]);
     }
 
