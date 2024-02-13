@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StockHistoric{% endblock %}
+
+{% block body %}
+    <h1>Create new StockHistoric</h1>
+
+    {{ include('stock_historic/_form.html.twig') }}
+
+    <a href="{{ path('stock_historic_index') }}">back to list</a>
+{% endblock %}

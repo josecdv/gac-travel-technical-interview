@@ -1,0 +1,22 @@
+<tr>
+    {{ form_start(form) }}
+        <td class="text-left">
+            {{ form_widget(form.name) }}
+        </td>
+        {# //{{ form_widget(form.created_at) }} #}
+        <tdclass="text-left">
+            {{ form_widget(form.stock) }}
+        </td>
+        <td class="text-center">
+            {{ form_widget(form.category) }}
+        </td>
+        {# <p>Selected category:
+        {% for category in categories %}
+            <p>{{ category.id }} {{ category.name }}</p>
+        {% endfor %}
+        </p> #}
+        <td class="text-right">
+            <button class="btn">{{ button_label|default('Save') }}</button>
+        </td>
+    {{ form_end(form) }}
+</tr>

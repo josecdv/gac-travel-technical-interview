@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - Modify stock{% endblock %}
+
+{% block body %}
+    <h1>Modificar stock para {{ product.name }}</h1>
+
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.stock, 'Stock change') }}
+            {{ form_widget(form.stock, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+
+        <button class="btn btn-primary" type="submit">Modificar stock</button>
+    {{ form_end(form) }}
+{% endblock %}

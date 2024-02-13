@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form.name) }}
+    {{ form_widget(form.category) }}
+    <p>Selected category:
+    {% for category in categories %}
+        <p>{{ category.id }} {{ category.name }}</p>
+    {% endfor %}
+    </p>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
