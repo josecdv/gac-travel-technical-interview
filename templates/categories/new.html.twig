@@ -84,6 +84,25 @@
 						<button type="submit" class="btn btn-primary mr-2">Añadir categoría</button>
 					</div>
                     {{ form_end(form) }}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger flash-message">
+                            {{ message }}
+                        </div>
+                        <script>
+                            // Hide the flash message after 3 seconds
+                            setTimeout(function() {
+                                const flashMessage = document.querySelector('.flash-message');
+                                if (flashMessage) {
+                                    flashMessage.style.transition = 'opacity 1s';
+                                    flashMessage.style.opacity = '0';
+                                    flashMessage.addEventListener('transitionend', () => {
+                                        flashMessage.remove();
+                                    });
+                                }
+                            }, 3000);
+                        </script>
+
+                    {% endfor %}
 				</div>
 			</div>
 		</div>

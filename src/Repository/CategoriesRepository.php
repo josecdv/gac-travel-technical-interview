@@ -19,6 +19,15 @@ class CategoriesRepository extends ServiceEntityRepository
         parent::__construct($registry, Categories::class);
     }
 
+    public function categoryExists(string $name): bool
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->where('u.name = :name')
+            ->setParameter('name', $name);
+
+        return (int) $qb->getQuery()->getSingleScalarResult() > 0;
+    }
     // /**
     //  * @return Categories[] Returns an array of Categories objects
     //  */

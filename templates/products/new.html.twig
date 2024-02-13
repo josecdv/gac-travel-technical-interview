@@ -69,8 +69,8 @@
 							<thead class="bg-white text-uppercase">
 								<tr class="ligth ligth-data" role="row">
 									<th class="text-left">Nombre</th>
-									<th class="text-center">Stock</th>
-									<th class="text-right">Categoría</th>
+									{# <th class="text-center">Stock</th> #}
+									<th class="text-center">Categoría</th>
 									<th class="text-right">Acciones</th>
 								</tr>
 							</thead>
@@ -80,9 +80,9 @@
                                         <td class="text-left">
                                             {{ form_widget(form.name) }}
                                         </td>
-                                        <td class="text-left">
+                                        {# <td class="text-left">
                                             {{ form_widget(form.stock) }}
-                                        </td>
+                                        </td> #}
                                         <td class="text-center">
                                             {{ form_widget(form.category) }}
                                         </td>

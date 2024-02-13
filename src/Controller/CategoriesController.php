@@ -22,13 +22,20 @@ class CategoriesController extends AbstractController
     }
 
     #[Route('/new', name: 'categories_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, CategoriesRepository $categoryRepository): Response
     {
         $category = new Categories();
         $form = $this->createForm(CategoriesType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($categoryRepository->categoryExists($category->getName())) {
+                $this->addFlash('error', 'Categories already exists.');
+                return $this->renderForm('categories/new.html.twig', [
+                    'user' => $category,
+                    'form' => $form,
+                ]);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();

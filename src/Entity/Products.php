@@ -44,6 +44,7 @@ class Products
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->stock = 0;
     }
 
     public function getCategory(): ?Categories
