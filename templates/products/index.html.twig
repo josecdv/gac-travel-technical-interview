@@ -114,6 +114,10 @@
                                 <a href="{{ path('stock_historic_index') }}">
                                     <button class="btn btn-primary mr-2">Histórico Total</button>
                                 </a>
+                                <a href="{{ path('reload_data_prod') }}" class="btn btn-primary ml-2">Upload Producto</a>
+                                {% for flashMessage in app.flashes('error') %}
+                                    <div class="alert alert-danger">{{ flashMessage }}</div>
+                                {% endfor %}
                             </div>                          
                         </div> 
                     </div>

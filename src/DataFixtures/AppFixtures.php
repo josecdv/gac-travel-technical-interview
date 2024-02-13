@@ -1,30 +1,61 @@
 <?php
-
 namespace App\DataFixtures;
 
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpClient\Exception\TransportException;
+use App\Entity\Categories;
+use App\Entity\Products;
 use App\Entity\Users;
 use App\Controller\UsersController;
-use App\Entity\Categories;
-use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-
-
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\Exception\TransportException;
 
 class AppFixtures extends Fixture
 {
     private $client;
     private $usersController;
     private $flashBag;
+    private string $entityType;
 
     public function __construct(UsersController $usersController, FlashBagInterface $flashBag)
     {
         $this->client = HttpClient::create();
         $this->usersController = $usersController;
         $this->flashBag = $flashBag;
+    }
+
+    public function setEntityType(string $entityType): void
+    {
+        $this->entityType = $entityType;
+    }
+
+    public function load(ObjectManager $manager): void
+    {
+        if ($this->entityType === null) {
+            throw new \RuntimeException("Entity type has not been set.");
+        }
+
+        switch ($this->entityType) {
+            case 'Users':
+                $entities = $this->loadUsers( $manager);
+                break;
+            case 'Categories':
+                $entities = $this->loadCategories( $manager);
+                break;
+            case 'Products':
+                $entities = $this->loadProducts( $manager);
+                break;
+            // add more cases for other entities
+            default:
+                throw new \InvalidArgumentException("Entity type '$this->entityType' is not supported.");
+        }
+
+        foreach ($entities as $entity) {
+            $manager->persist($entity);
+        }
+
+        $manager->flush();
     }
 
     public function loadUsers(ObjectManager $manager): array
@@ -63,38 +94,82 @@ class AppFixtures extends Fixture
         return $users;
     }
 
-    // public function loadCategories(int $count = 10): array
-    // {
-    //     // $categories = [];
-    //     // for ($i = 0; $i < $count; $i++) {
-    //     //     try {
-    //     //         $response = $this->client->request('GET', 'https://fakeapi.com/categories/1' . $i);
-    //     //         $statusCode = $response->getStatusCode();
-    //     //         if ($statusCode == 200) {
-    //     //             $content = $response->toArray();
-    //     //             $category = new Categories();
-    //     //             $category->setName($content['name']);
-    //     //             $categories[] = $category;
-    //     //         }
-    //     //     } catch (TransportException $e) {
-    //     //         // handle exception
-    //     //     }
-    //     // }
-    //     // return $categories;
-    // }
-
-    public function load(ObjectManager $manager)
+    public function loadCategories(ObjectManager $manager): array
     {
-        $users = $this->loadUsers($manager);
-        foreach ($users as $user) {
-            $manager->persist($user);
+        $categories = [];
+        for ($i = 0; $i < 1; $i++) 
+        {
+            try {
+                $response = $this->client->request('GET', 'https://fakestoreapi.com/products/categories');
+                $statusCode = $response->getStatusCode();
+                if ($statusCode == 200) {
+                    $content = $response->toArray();
+					$randomCategories = array_rand($content);
+                    if ($content !== null) {
+						$category = new Categories();
+						$category->setName($content[$randomCategories]);
+						 
+                         // Check if the Category already exists
+                        $existingCategoria = $manager->getRepository(Categories::class)->findOneBy(['name' => $category->getName()]);
+                        if ($existingCategoria) {
+                            // Add a flash message for the error
+                            $this->flashBag->add('error', 'Category already exists.');
+                            continue;
+                        }						
+						
+                        $categories[] = $category;
+                    }
+                }
+            } catch (TransportException $e) {
+                // handle exception
+            }
         }
-
-        // $categories = $this->loadCategories(5);
-        // foreach ($categories as $category) {
-        //     $manager->persist($category);
-        // }
-
-        $manager->flush();
+        return $categories;
     }
+
+    public function loadProducts(ObjectManager $manager): array
+    {
+       
+        $products = [];
+        $categories = $manager->getRepository(Categories::class)->findAll();
+        for ($i = 0; $i < 1; $i++) 
+        {
+            try {
+                $response = $this->client->request('GET', 'https://fakestoreapi.com/products');
+                $statusCode = $response->getStatusCode();
+                if ($statusCode == 200) {
+                    $content = $response->toArray();
+                    //$randomProduct = $content[array_rand($content)];
+					$randomProduct = array_rand($content);
+                    //$productCategory = $randomProduct['category'];
+					$productCategory = $content[$randomProduct]['category'];
+					$title = $content[$randomProduct]['title'];
+
+                    //$existingCategoria = $manager->getRepository(Categories::class)->findOneBy(['name' => $productCategory]);
+                    $existingCategoria = null;
+                    foreach ($categories as $category) {
+                        if ($category->getName() === $productCategory) {
+                            $existingCategoria = $category;
+                            break;
+                        }
+                    }
+                    
+                    if ($content !== null && $existingCategoria) {
+                        
+						$category = new Categories();
+                        $product = new Products();
+						$product->setName($title);
+                        $product->setCategory($existingCategoria);
+                    
+                        $products[] = $product;
+                    }
+                }
+            } catch (TransportException $e) {
+                // handle exception
+            }
+        }
+        return $products;
+    }
+
+
 }

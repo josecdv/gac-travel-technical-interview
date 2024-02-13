@@ -103,6 +103,12 @@
 									{% endfor %}
 								</table>
                             </div>
+                            <div class="col-md-12 mt-5 text-center">
+                                <a href="{{ path('reload_data_categorias') }}" class="btn btn-primary ml-2">Upload Categorias</a>
+                                {% for flashMessage in app.flashes('error') %}
+                                    <div class="alert alert-danger">{{ flashMessage }}</div>
+                                {% endfor %}
+                            </div>  
                         </div> 
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Users;
 use App\DataFixtures\AppFixtures;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +24,36 @@ class DefaultController extends AbstractController
     #[Route('/reload-data', name: 'reload_data', methods: ['GET'])]
     public function reloadData(): Response
     {
-        $this->fixtures->load($this->entityManager); // Ejecutar las fixtures para cargar los datos
+        $entityType = Users::class; 
+        $this->fixtures->setEntityType('Users');
+        $this->fixtures->load($this->entityManager, $entityType);
+        // $entityType = Users::class; 
+        // $this->fixtures->load($this->entityManager, $entityType); // Ejecutar las fixtures para cargar los datos
 
-        return $this->redirectToRoute('users_index'); // Redireccionar a la página de productos (o a donde sea necesario)
+         return $this->redirectToRoute('users_index'); // Redireccionar a la página de productos (o a donde sea necesario)
+    }
+
+    #[Route('/reload-data-categorias', name: 'reload_data_categorias', methods: ['GET'])]
+    public function reloadDataC(): Response
+    {
+        $entityType = Users::class; 
+        $this->fixtures->setEntityType('Categories');
+        $this->fixtures->load($this->entityManager, $entityType);
+        // $entityType = Users::class; 
+        // $this->fixtures->load($this->entityManager, $entityType); // Ejecutar las fixtures para cargar los datos
+
+         return $this->redirectToRoute('categories_index'); // Redireccionar a la página de productos (o a donde sea necesario)
+    }
+
+    #[Route('/reload-data-prod', name: 'reload_data_prod', methods: ['GET'])]
+    public function reloadDataP(): Response
+    {
+        $entityType = Users::class; 
+        $this->fixtures->setEntityType('Products');
+        $this->fixtures->load($this->entityManager, $entityType);
+        // $entityType = Users::class; 
+        // $this->fixtures->load($this->entityManager, $entityType); // Ejecutar las fixtures para cargar los datos
+
+         return $this->redirectToRoute('products_index'); // Redireccionar a la página de productos (o a donde sea necesario)
     }
 }
