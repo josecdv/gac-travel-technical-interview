@@ -1,3 +1,28 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    doctrine.user_listener:
+        class: App\EventListener\StockHistoricListener
+        arguments: []
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate}
+    
+    App\DataFixtures\AppFixtures:
+        arguments:
+            $client: '@Symfony\Component\HttpClient\HttpClient'
+            $usersController: '@App\Controller\UsersController'
+        tags:
+            - { name: doctrine.fixture.loader }
+
+    App\Controller\UsersController:
+        properties:
+            flashMessages:
+                session_key: 'flash_messages'
+                flash_message_duration: 3 # Set the duration to 3 seconds
+        
+         
 security:
     # https://symfony.com/doc/current/security/authenticator_manager.html
     enable_authenticator_manager: true
@@ -5,24 +30,60 @@ security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_ADMIN:
+        #ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Users
+                property: username
+        #users_in_memory: { memory: null }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            #provider: users_in_memory
+            custom_authenticator: App\Security\LoginFormAuthenticator
+            # form_login:
+            #     login_path: app_login
+            #     check_path: app_login
+            logout: true
 
+            #pattern: ^/reload-data
+            #security: false
+            #    path: /logout
+            # guard:
+            #     authenticators:
+            #         - App\Security\LoginFormAuthenticator
+                # where to redirect after logout
+                # target: app_any_route
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
+            # role_hierarchy:
+            #     ROLE_ADMIN: ROLE_USER
+                # Add any other roles if needed
+        #access_denied_url: app_access_denied
+        
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - {path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - {path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - {path: ^/users/new, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - {path: ^/users/success, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - {path: ^/users, roles: ROLE_ADMIN}
+        - {path: ^/products, roles: ROLE_ADMIN}         
+        - {path: ^/categories, roles: ROLE_ADMIN}
+        - {path: ^/stock/historic, roles: ROLE_ADMIN}
+        - {path: ^/reload-data, roles: ROLE_ADMIN}
+               
         # - { path: ^/profile, roles: ROLE_USER }
+   
+    
